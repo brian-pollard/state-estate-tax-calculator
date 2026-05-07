@@ -53,3 +53,9 @@ The remaining 37 states + territories have no estate tax.
 Single self-contained HTML file. No build step, no external JS dependencies, no server required. Open `docs/index.html` directly in any browser.
 
 All computation logic validated against official state tax authority forms and statutes (April 2026).
+
+---
+
+## Disclaimer
+
+This calculator provides estimates for general planning and educational purposes only. It does not constitute legal, tax, or financial advice. Estate tax laws are complex, state-specific, and subject to annual change. Figures are based on official state statutes and tax authority publications as of April 2026. Consult a licensed estate planning attorney or CPA before making any decisions.
