@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FLMLRDRW7Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FLMLRDRW7Z');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 State Estate Tax Calculator — Brian J. Pollard</title>
+  <meta name="description" content="Free 2026 state estate tax calculator — select a state, enter an estate value, and instantly see your estimated tax liability across all 12 state estate tax jurisdictions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:        #0B1E3D;
+      --navy-mid:    #162952;
+      --navy-light:  #1E3A6E;
+      --blue:        #2563EB;
+      --blue-hover:  #1D4ED8;
+      --blue-pale:   #EFF6FF;
+      --blue-border: #BFDBFE;
+      --amber:       #c9a43a;
+      --amber-pale:  #faf5e6;
+      --amber-border:#e8d08a;
+      --text:        #0F172A;
+      --text-2:      #475569;
+      --text-3:      #94A3B8;
+      --border:      #E2E8F0;
+      --border-2:    #F1F5F9;
+      --bg:          #F8FAFC;
+      --white:       #FFFFFF;
+      --shadow-sm:   0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md:   0 4px 16px rgba(0,0,0,0.10);
+      --r:           12px;
+      --r-sm:        8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+    }
+    input, select, button { font-family: inherit; }
+    button { cursor: pointer; border: none; }
+
+    /* ── Header ─────────────────────────────────────────────────────────────── */
+    header {
+      background: var(--navy);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .header-brand:hover { opacity: 0.85; }
+    .header-logo {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+    .header-brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .header-brand-name {
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .header-brand-tagline {
+      color: rgba(255,255,255,0.45);
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .header-tag   { color:rgba(255,255,255,.4); font-size:11.5px; }
+    .header-back  { color:rgba(255,255,255,0.6); font-size:12px; font-weight:500; text-decoration:none; transition:color .15s; border:1px solid rgba(255,255,255,0.2); border-radius:20px; padding:3px 12px; }
+    .header-back:hover { color:#fff; border-color:rgba(255,255,255,0.5); }
+    @media (max-width:600px) { .header-tag { display:none; } }
+
+    /* ── Hero ───────────────────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content:'';
+      position:absolute; inset:0;
+      background-image: linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+                        linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+      background-size:48px 48px;
+      pointer-events:none;
+    }
+    .hero h1 { color:#fff; font-size:clamp(1.65rem,4vw,2.4rem); font-weight:700; letter-spacing:-.02em; margin-bottom:.5rem; position:relative; }
+    .hero-sub { color:rgba(255,255,255,.65); font-size:.95rem; max-width:580px; margin:0 auto 1.25rem; position:relative; }
+    .hero-badges { display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap; position:relative; }
+    .hero-badge  { background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.15); color:rgba(255,255,255,.80); font-size:11.5px; font-weight:500; padding:3px 10px; border-radius:20px; }
+
+    /* ── Container ──────────────────────────────────────────────────────────── */
+    .container { max-width:920px; margin:0 auto; padding:2rem 1.25rem 3.5rem; }
+
+    /* ── Card base ──────────────────────────────────────────────────────────── */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      box-shadow: var(--shadow-md);
+    }
+    .card-header {
+      padding: 1.25rem 1.5rem 1rem;
+      border-bottom: 1px solid var(--border-2);
+    }
+    .card-header h2 { font-size:.95rem; font-weight:600; color:var(--text); }
+    .card-body { padding: 1.5rem; }
+
+    /* ── Inputs Card ────────────────────────────────────────────────────────── */
+    .inputs-card { margin-bottom:1.5rem; }
+    .input-grid { display:grid; grid-template-columns:1.4fr 1.4fr 1fr; gap:1.1rem 1.25rem; }
+    @media(max-width:640px){ .input-grid { grid-template-columns:1fr 1fr; } }
+    @media(max-width:420px){ .input-grid { grid-template-columns:1fr; } }
+
+    .field label { display:block; font-size:11.5px; font-weight:600; color:var(--text-2); letter-spacing:.04em; text-transform:uppercase; margin-bottom:.35rem; }
+    .input-wrap { position:relative; display:flex; align-items:center; }
+    .input-prefix { position:absolute; left:11px; color:var(--text-3); font-weight:500; pointer-events:none; }
+
+    .field input[type=number] {
+      width:100%; padding:.65rem .8rem .65rem 1.7rem;
+      border:1.5px solid var(--border); border-radius:var(--r-sm);
+      font-size:15px; font-weight:500; color:var(--text); background:var(--white);
+      transition:border-color .15s, box-shadow .15s;
+      -moz-appearance:textfield;
+    }
+    .field input[type=number]::-webkit-outer-spin-button,
+    .field input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none; }
+    .field input[type=number]:focus { outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(37,99,235,.12); }
+
+    .field select {
+      width:100%; padding:.65rem .8rem;
+      border:1.5px solid var(--border); border-radius:var(--r-sm);
+      font-size:14px; font-weight:500; color:var(--text); background:var(--white);
+      appearance:none; cursor:pointer;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2394A3B8' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat:no-repeat; background-position:right 10px center;
+      transition:border-color .15s, box-shadow .15s;
+    }
+    .field select:focus { outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(37,99,235,.12); }
+
+    .field-note { font-size:11px; color:var(--text-3); margin-top:.25rem; }
+
+    /* Examples */
+    .examples { margin-top:1.1rem; padding-top:1.1rem; border-top:1px solid var(--border-2); display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; }
+    .examples-label { font-size:11px; font-weight:600; color:var(--text-3); letter-spacing:.04em; text-transform:uppercase; white-space:nowrap; }
+    .example-btn { background:var(--border-2); color:var(--text-2); border:1px solid var(--border); border-radius:20px; font-size:12px; font-weight:500; padding:3px 11px; transition:background .15s,color .15s; }
+    .example-btn:hover { background:var(--blue-pale); color:var(--blue); border-color:var(--blue-border); }
+
+    /* Optional */
+    .optional-toggle { margin-top:1.1rem; padding-top:1.1rem; border-top:1px solid var(--border-2); }
+    .optional-toggle-btn { background:none; color:var(--blue); font-size:13px; font-weight:500; display:flex; align-items:center; gap:.35rem; padding:0; }
+    .optional-toggle-btn:hover { color:var(--blue-hover); }
+    .opt-body { display:none; margin-top:1rem; }
+    .opt-body.open { display:block; }
+    .opt-inner { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem 1.25rem; }
+    @media(max-width:640px){ .opt-inner { grid-template-columns:1fr 1fr; } }
+
+    .radio-group { display:flex; flex-direction:column; gap:.35rem; margin-top:.1rem; }
+    .radio-opt { display:flex; align-items:flex-start; gap:.4rem; cursor:pointer; font-size:13px; color:var(--text); line-height:1.4; }
+    .radio-opt input { margin-top:2px; cursor:pointer; accent-color:var(--blue); flex-shrink:0; }
+
+    /* Calc button */
+    .calc-btn-row { margin-top:1.4rem; display:flex; align-items:center; gap:1rem; }
+    .calc-btn { background:var(--blue); color:#fff; font-size:15px; font-weight:600; padding:.7rem 2rem; border-radius:var(--r-sm); letter-spacing:.01em; transition:background .15s,box-shadow .15s,transform .1s; box-shadow:0 2px 8px rgba(37,99,235,.30); }
+    .calc-btn:hover { background:var(--blue-hover); box-shadow:0 4px 16px rgba(37,99,235,.35); }
+    .calc-btn:active { transform:scale(.98); }
+
+    /* ── Results layout ─────────────────────────────────────────────────────── */
+    .results { display:none; }
+    .results.visible { display:flex; flex-direction:column; gap:1.25rem; }
+
+    /* Disclaimer */
+    .disclaimer-bar {
+      background:var(--amber-pale); border:1px solid var(--amber-border);
+      border-radius:var(--r-sm); padding:.65rem 1rem;
+      font-size:12px; color:#92400E; display:flex; gap:.5rem; align-items:flex-start;
+    }
+
+    /* ── Card 1: Featured State ─────────────────────────────────────────────── */
+    .featured-card { overflow:hidden; }
+    .featured-header {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      padding: 1.5rem 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .featured-left { display:flex; align-items:center; gap:1rem; }
+    .featured-abbr-badge {
+      width:56px; height:56px; border-radius:10px;
+      background:rgba(255,255,255,.15); border:1.5px solid rgba(255,255,255,.25);
+      color:#fff; font-size:14px; font-weight:800; letter-spacing:.04em;
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    }
+    .featured-state-name { color:#fff; font-size:1.35rem; font-weight:700; letter-spacing:-.01em; line-height:1.2; }
+    .featured-state-sub  { color:rgba(255,255,255,.60); font-size:12.5px; margin-top:.2rem; }
+    .featured-right { text-align:right; }
+    .featured-tax-label { color:rgba(255,255,255,.55); font-size:11px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; margin-bottom:.25rem; }
+    .featured-tax-value { color:#fff; font-size:2.4rem; font-weight:700; letter-spacing:-.03em; line-height:1; }
+    .featured-tax-sub   { color:rgba(255,255,255,.50); font-size:12px; margin-top:.35rem; }
+    .featured-no-tax-value { color:rgba(255,255,255,.70); font-size:1.5rem; font-weight:600; }
+
+    /* Featured cliff banner */
+    .cliff-banner {
+      background:var(--amber-pale); border-bottom:1px solid var(--amber-border);
+      padding:.65rem 1.75rem; font-size:12.5px; color:#92400E;
+      display:flex; align-items:center; gap:.5rem;
+    }
+    .cliff-banner strong { font-weight:700; }
+
+    /* Featured computation steps */
+    .featured-steps { padding:1.25rem 1.75rem 1.5rem; }
+    .steps-title { font-size:11px; font-weight:700; color:var(--text-3); letter-spacing:.06em; text-transform:uppercase; margin-bottom:.85rem; }
+    .step-row {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:.3rem 0; border-bottom:1px solid var(--border-2); font-size:13.5px;
+    }
+    .step-row:last-child { border-bottom:none; }
+    .step-row.italic .step-label { font-style:italic; color:var(--text-3); }
+    .step-label { color:var(--text-2); }
+    .step-value { font-weight:600; color:var(--text); white-space:nowrap; }
+    .step-value.neg { color:var(--text-3); }
+    .step-row.result-row {
+      margin-top:.5rem; background:var(--blue-pale);
+      border-radius:8px; padding:.6rem .85rem;
+      border-bottom:none;
+    }
+    .step-row.result-row .step-label { color:var(--navy); font-weight:600; font-style:normal; }
+    .step-row.result-row .step-value { color:var(--navy); font-size:15.5px; }
+    .step-note { font-size:12px; color:var(--text-3); font-style:italic; margin-top:.85rem; padding-top:.75rem; border-top:1px solid var(--border-2); }
+
+    /* No-tax featured */
+    .no-tax-state-body { padding:2rem 1.75rem; display:flex; align-items:center; gap:1rem; }
+    .no-tax-icon { font-size:2rem; }
+    .no-tax-msg-title { font-size:1rem; font-weight:600; color:var(--text); margin-bottom:.25rem; }
+    .no-tax-msg-body  { font-size:13px; color:var(--text-2); line-height:1.5; }
+
+    /* ── Card 2: Other Estate Tax States ────────────────────────────────────── */
+    .other-card {}
+    .other-header {
+      padding:.9rem 1.25rem;
+      display:flex; align-items:center; justify-content:space-between;
+      border-bottom:1px solid var(--border-2);
+    }
+    .other-header-left { display:flex; align-items:center; gap:.6rem; }
+    .other-header h3 { font-size:.9rem; font-weight:600; color:var(--text); }
+    .other-count-badge { background:var(--navy); color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:20px; }
+
+    .other-col-heads {
+      display:grid; grid-template-columns:2fr 1.2fr 1.2fr 1.2fr 1fr 2rem;
+      padding:.5rem 1.25rem; gap:.5rem;
+      background:var(--border-2); border-bottom:1px solid var(--border);
+    }
+    .col-h { font-size:10px; font-weight:700; color:var(--text-3); letter-spacing:.06em; text-transform:uppercase; }
+    .col-h.r { text-align:right; }
+
+    .other-row { border-top:1px solid var(--border-2); }
+    .other-row:first-child { border-top:none; }
+    .other-row-main {
+      display:grid; grid-template-columns:2fr 1.2fr 1.2fr 1.2fr 1fr 2rem;
+      padding:.7rem 1.25rem; gap:.5rem; align-items:center; cursor:pointer;
+      transition:background .1s;
+    }
+    .other-row-main:hover { background:var(--border-2); }
+    .other-abbr-badge {
+      width:28px; height:28px; border-radius:5px; background:var(--navy);
+      color:#fff; font-size:9px; font-weight:700; letter-spacing:.03em;
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    }
+    .other-name-wrap { display:flex; align-items:center; gap:.55rem; }
+    .other-name { font-size:13.5px; font-weight:600; color:var(--text); }
+    .other-sub  { font-size:11px; color:var(--text-3); margin-top:1px; }
+    .c-amt { font-size:13px; font-weight:500; color:var(--text-2); text-align:right; }
+    .c-tax { font-size:13.5px; font-weight:700; color:var(--navy); text-align:right; }
+    .c-tax.zero { font-size:12.5px; font-weight:400; color:var(--text-3); }
+    .c-rate { font-size:12.5px; font-weight:500; color:var(--text-2); text-align:right; }
+    .c-rate.zero { color:var(--text-3); }
+    .row-expand-btn {
+      background:none; color:var(--text-3); font-size:15px;
+      width:24px; height:24px; border-radius:4px;
+      display:flex; align-items:center; justify-content:center;
+      transition:background .1s,color .1s; justify-self:end;
+    }
+    .row-expand-btn:hover { background:var(--border); color:var(--text); }
+    .row-expand-btn.open { color:var(--blue); }
+
+    /* Other row detail */
+    .other-detail {
+      display:none; background:#FAFBFD; padding:.9rem 1.25rem .9rem 4.3rem;
+      border-top:1px dashed var(--border);
+    }
+    .other-detail.open { display:block; }
+    .other-detail .steps-title { margin-bottom:.6rem; }
+    .other-step-row { display:flex; justify-content:space-between; font-size:12.5px; padding:.2rem 0; border-bottom:1px solid var(--border-2); }
+    .other-step-row:last-child { border-bottom:none; }
+    .other-step-row.italic span:first-child { font-style:italic; color:var(--text-3); }
+    .other-step-row span:first-child { color:var(--text-2); }
+    .other-step-row span:last-child { font-weight:600; color:var(--text); }
+    .other-step-row.neg span:last-child { color:var(--text-3); }
+    .other-step-row.result-row {
+      background:var(--blue-pale); border-radius:6px; padding:.45rem .7rem;
+      margin-top:.3rem; border-bottom:none;
+    }
+    .other-step-row.result-row span:first-child { color:var(--navy); font-weight:600; font-style:normal; }
+    .other-step-row.result-row span:last-child { color:var(--navy); font-size:14px; }
+    .other-detail-note { font-size:11px; color:var(--text-3); font-style:italic; margin-top:.6rem; }
+    .cliff-inline {
+      background:var(--amber-pale); border:1px solid var(--amber-border);
+      border-radius:5px; padding:.4rem .65rem; font-size:11.5px; color:#92400E; margin:.4rem 0;
+    }
+
+    @media(max-width:640px) {
+      /* Collapse 6-col grid to 3-col: State | Est. Tax | expand */
+      .other-col-heads,
+      .other-row-main {
+        grid-template-columns: 1fr auto 2rem;
+      }
+      /* Hide Exemption, Taxable Estate, Eff. Rate columns */
+      .c-amt,
+      .c-rate,
+      .other-col-heads .col-h:nth-child(2),
+      .other-col-heads .col-h:nth-child(3),
+      .other-col-heads .col-h:nth-child(5) { display: none; }
+      /* Remove deep indent on expanded detail rows */
+      .other-detail { padding-left: 1.25rem; }
+      /* Hide "click any row to expand" hint — redundant on touch */
+      .other-header > span { display: none; }
+    }
+
+    /* ── Card 3: No Estate Tax States ───────────────────────────────────────── */
+    .notax-card {}
+    .notax-header {
+      padding:.9rem 1.25rem; cursor:pointer;
+      display:flex; align-items:center; justify-content:space-between;
+      transition:background .1s;
+    }
+    .notax-header:hover { background:var(--border-2); border-radius:var(--r); }
+    .notax-header-left { display:flex; align-items:center; gap:.75rem; }
+    .notax-icon { font-size:1.3rem; opacity:.6; }
+    .notax-title { font-size:.9rem; font-weight:600; color:var(--text); }
+    .notax-sub   { font-size:12px; color:var(--text-3); margin-top:1px; }
+    .notax-expand-btn {
+      background:none; color:var(--text-3); font-size:13px;
+      padding:4px 10px; border-radius:20px; border:1px solid var(--border);
+      font-weight:500; display:flex; align-items:center; gap:.35rem;
+      transition:background .15s,color .15s;
+    }
+    .notax-expand-btn:hover { background:var(--border-2); color:var(--text-2); }
+    .notax-body { display:none; border-top:1px solid var(--border-2); }
+    .notax-body.open { display:block; }
+    .notax-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:0; }
+    .notax-item {
+      display:flex; align-items:center; gap:.5rem;
+      padding:.55rem 1.25rem; border-bottom:1px solid var(--border-2); border-right:1px solid var(--border-2);
+    }
+    .notax-abbr { font-size:10px; font-weight:700; color:var(--text-3); width:24px; }
+    .notax-name { font-size:13px; color:var(--text-2); }
+    .notax-note-small { font-size:10.5px; color:var(--text-3); margin-top:1px; }
+
+    /* ── Footer ─────────────────────────────────────────────────────────────── */
+    footer { background:var(--navy); color:rgba(255,255,255,.5); padding:2rem; font-size:12px; line-height:1.7; margin-top:1rem; }
+    .footer-inner { max-width:920px; margin:0 auto; display:flex; justify-content:space-between; gap:2rem; flex-wrap:wrap; }
+    .footer-disclaimer { max-width:600px; }
+    .footer-disclaimer strong { color:rgba(255,255,255,.75); }
+    .footer-brand { text-align:right; }
+    .footer-brand a { color:rgba(255,255,255,.7); text-decoration:none; }
+    .footer-brand a:hover { color:#fff; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="../index.html" class="header-brand">
+    <img src="../assets/favicon.svg" class="header-logo" alt="B" style="width:32px;height:32px;" />
+    <div class="header-brand-text">
+      <span class="header-brand-name">Brian J. Pollard</span>
+      <span class="header-brand-tagline">AI-Built Project</span>
+    </div>
+  </a>
+  <div class="header-right">
+    <span class="header-tag">Estate Planning Tools · 2026</span>
+    <a href="../portfolio.html" class="header-back">← Portfolio</a>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>2026 State Estate Tax Calculator</h1>
+  <p class="hero-sub">Select a state, enter an estate value, and see your state's estimated tax front and center — with all other estate tax jurisdictions summarized below.</p>
+  <div class="hero-badges">
+    <span class="hero-badge">13 Jurisdictions</span>
+    <span class="hero-badge">6 Computation Methods</span>
+    <span class="hero-badge">NY Cliff Rule</span>
+    <span class="hero-badge">WA Dual-Period 2026</span>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- ── Inputs ────────────────────────────────────────────────────────────── -->
+  <div class="card inputs-card">
+    <div class="card-header"><h2>Estate Inputs</h2></div>
+    <div class="card-body">
+      <div class="input-grid">
+        <div class="field">
+          <label>State of Primary Concern</label>
+          <select id="sel-state">
+            <option value="">— Select a state —</option>
+            <optgroup label="States with Estate Tax">
+              <option value="CT">Connecticut (CT)</option>
+              <option value="DC">District of Columbia (DC)</option>
+              <option value="HI">Hawaii (HI)</option>
+              <option value="IL">Illinois (IL)</option>
+              <option value="ME">Maine (ME)</option>
+              <option value="MD">Maryland (MD)</option>
+              <option value="MA">Massachusetts (MA)</option>
+              <option value="MN">Minnesota (MN)</option>
+              <option value="NY">New York (NY)</option>
+              <option value="OR">Oregon (OR)</option>
+              <option value="RI">Rhode Island (RI)</option>
+              <option value="VT">Vermont (VT)</option>
+              <option value="WA">Washington (WA)</option>
+            </optgroup>
+            <optgroup label="States Without Estate Tax">
+              <option value="AL">Alabama (AL)</option><option value="AK">Alaska (AK)</option>
+              <option value="AZ">Arizona (AZ)</option><option value="AR">Arkansas (AR)</option>
+              <option value="CA">California (CA)</option><option value="CO">Colorado (CO)</option>
+              <option value="DE">Delaware (DE)</option><option value="FL">Florida (FL)</option>
+              <option value="GA">Georgia (GA)</option><option value="ID">Idaho (ID)</option>
+              <option value="IN">Indiana (IN)</option><option value="IA">Iowa (IA)</option>
+              <option value="KS">Kansas (KS)</option><option value="KY">Kentucky (KY)</option>
+              <option value="LA">Louisiana (LA)</option><option value="MI">Michigan (MI)</option>
+              <option value="MS">Mississippi (MS)</option><option value="MO">Missouri (MO)</option>
+              <option value="MT">Montana (MT)</option><option value="NE">Nebraska (NE)</option>
+              <option value="NV">Nevada (NV)</option><option value="NH">New Hampshire (NH)</option>
+              <option value="NJ">New Jersey (NJ)</option><option value="NM">New Mexico (NM)</option>
+              <option value="NC">North Carolina (NC)</option><option value="ND">North Dakota (ND)</option>
+              <option value="OH">Ohio (OH)</option><option value="OK">Oklahoma (OK)</option>
+              <option value="PA">Pennsylvania (PA)</option><option value="SC">South Carolina (SC)</option>
+              <option value="SD">South Dakota (SD)</option><option value="TN">Tennessee (TN)</option>
+              <option value="TX">Texas (TX)</option><option value="UT">Utah (UT)</option>
+              <option value="VA">Virginia (VA)</option><option value="WV">West Virginia (WV)</option>
+              <option value="WI">Wisconsin (WI)</option><option value="WY">Wyoming (WY)</option>
+            </optgroup>
+          </select>
+          <div class="field-note">Results for this state appear prominently above all others</div>
+        </div>
+        <div class="field">
+          <label>Gross Estate (Fair Market Value)</label>
+          <div class="input-wrap">
+            <span class="input-prefix">$</span>
+            <input type="number" id="gross" min="0" step="100000" placeholder="e.g. 10,000,000">
+          </div>
+          <div class="field-note">Total fair market value of all assets at date of death</div>
+        </div>
+        <div class="field">
+          <label>Allowable Deductions</label>
+          <div class="input-wrap">
+            <span class="input-prefix">$</span>
+            <input type="number" id="deductions" min="0" step="10000" placeholder="0" value="0">
+          </div>
+          <div class="field-note">Marital deduction, charitable, debts, expenses</div>
+        </div>
+      </div>
+
+      <div class="examples">
+        <span class="examples-label">Try:</span>
+        <button class="example-btn" onclick="setExample('NY',7500000)">NY $7.5M — cliff zone</button>
+        <button class="example-btn" onclick="setExample('MA',3000000)">MA $3M</button>
+        <button class="example-btn" onclick="setExample('OR',5000000)">OR $5M</button>
+        <button class="example-btn" onclick="setExample('WA',10000000)">WA $10M</button>
+        <button class="example-btn" onclick="setExample('HI',15000000)">HI $15M</button>
+        <button class="example-btn" onclick="setExample('FL',20000000)">FL $20M — no tax</button>
+      </div>
+
+      <div class="optional-toggle">
+        <button class="optional-toggle-btn" onclick="toggleOpt(this)">
+          <span id="opt-chev">▶</span> Optional adjustments (CT gifts · HI DSUE · WA period)
+        </button>
+        <div class="opt-body" id="opt-body">
+          <div class="opt-inner" style="margin-top:.9rem">
+            <div class="field">
+              <label>WA Period of Death</label>
+              <div class="radio-group">
+                <label class="radio-opt"><input type="radio" name="wa" value="A"> Period A: Jan–Jun 2026<br><span style="font-size:11px;color:var(--text-3);padding-left:1.1rem">10%–35%, $3.076M exemption</span></label>
+                <label class="radio-opt"><input type="radio" name="wa" value="B" checked> Period B: Jul–Dec 2026<br><span style="font-size:11px;color:var(--text-3);padding-left:1.1rem">10%–20%, $3M exemption</span></label>
+              </div>
+            </div>
+            <div class="field">
+              <label>CT Post-2004 Taxable Gifts</label>
+              <div class="input-wrap"><span class="input-prefix">$</span>
+                <input type="number" id="ct-gifts" min="0" step="10000" placeholder="0" value="0">
+              </div>
+              <div class="field-note">Added back to CT taxable base only</div>
+            </div>
+            <div class="field">
+              <label>HI Deceased Spouse Exclusion (DSUE)</label>
+              <div class="input-wrap"><span class="input-prefix">$</span>
+                <input type="number" id="hi-dsue" min="0" step="100000" placeholder="0" value="0">
+              </div>
+              <div class="field-note">Increases effective HI exemption (portability)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-btn-row">
+        <button class="calc-btn" onclick="calculate()">Calculate Estate Tax</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Results ───────────────────────────────────────────────────────────── -->
+  <div class="results" id="results">
+
+    <div class="disclaimer-bar">
+      <strong>⚠ Planning Reference Only.</strong>&nbsp;These are tentative estimates for illustrative purposes. Estate tax law is complex and subject to change. Do not rely on this calculator for legal, tax, or financial decisions. Consult a qualified estate planning attorney.
+    </div>
+
+    <!-- Card 1: Featured State -->
+    <div class="card featured-card" id="featured-card"></div>
+
+    <!-- Card 2: Other Estate Tax States -->
+    <div class="card other-card" id="other-card"></div>
+
+    <!-- Card 3: No Estate Tax States -->
+    <div class="card notax-card" id="notax-card"></div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-disclaimer">
+      <strong>Disclaimer:</strong> This calculator provides estimates for general planning and educational purposes only. It does not constitute legal, tax, or financial advice. Estate tax laws are complex, state-specific, and subject to annual change. Figures are based on official state statutes and tax authority publications as of April 2026. Consult a licensed estate planning attorney or CPA before making any decisions.
+    </div>
+    <div class="footer-brand">
+      Built by<br>
+      <a href="../index.html">Brian J. Pollard</a><br>
+      <span style="font-size:11px;color:rgba(255,255,255,.3)">Tax Year 2026 · Verified April 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Rate Tables ───────────────────────────────────────────────────────────────
+const FED = [
+  [0,40000,0,.000],[40000,90000,0,.008],[90000,140000,400,.016],
+  [140000,240000,1200,.024],[240000,440000,3600,.032],[440000,640000,10000,.040],
+  [640000,840000,18000,.048],[840000,1040000,27600,.056],[1040000,1540000,38800,.064],
+  [1540000,2040000,70800,.072],[2040000,2540000,106800,.080],[2540000,3040000,146800,.088],
+  [3040000,3540000,190800,.096],[3540000,4040000,238800,.104],[4040000,5040000,290800,.112],
+  [5040000,6040000,402800,.120],[6040000,7040000,522800,.128],[7040000,8040000,650800,.136],
+  [8040000,9040000,786800,.144],[9040000,10040000,930800,.152],[10040000,Infinity,1082800,.160],
+];
+const HI_T = [
+  [0,1000000,0,.10],[1000000,2000000,100000,.11],[2000000,3000000,210000,.12],
+  [3000000,4000000,330000,.13],[4000000,5000000,460000,.14],[5000000,10000000,600000,.157],
+  [10000000,Infinity,1385000,.20],
+];
+const ME_T = [[0,2000000,0,.08],[2000000,4000000,160000,.10],[4000000,Infinity,360000,.12]];
+const MN_T = [[0,4100000,0,.13],[4100000,5100000,533000,.14],[5100000,6100000,673000,.15],[6100000,Infinity,823000,.16]];
+const NY_T = [
+  [0,500000,0,.0306],[500000,1000000,15300,.05],[1000000,1500000,40300,.05],
+  [1500000,2100000,65300,.05],[2100000,2600000,95300,.065],[2600000,3100000,127800,.08],
+  [3100000,3600000,167800,.088],[3600000,4100000,211800,.096],[4100000,5100000,259800,.104],
+  [5100000,6100000,363800,.112],[6100000,7100000,475800,.12],[7100000,8100000,595800,.128],
+  [8100000,9100000,723800,.136],[9100000,10100000,859800,.144],[10100000,Infinity,1003800,.16],
+];
+const OR_T = [
+  [0,1000000,0,.100],[1000000,2000000,100000,.1025],[2000000,3000000,202500,.105],
+  [3000000,4000000,307500,.1075],[4000000,5000000,415000,.110],[5000000,6000000,525000,.1125],
+  [6000000,7000000,637500,.115],[7000000,8000000,752500,.120],[8000000,9000000,872500,.125],
+  [9000000,10000000,997500,.130],[10000000,11000000,1127500,.140],[11000000,Infinity,1267500,.160],
+];
+const DC_T = [
+  [0,11600,0,.112],[11600,1011600,1299.20,.120],[1011600,2011600,121299.20,.128],
+  [2011600,3011600,249299.20,.136],[3011600,4011600,385299.20,.144],
+  [4011600,5011600,529299.20,.152],[5011600,Infinity,681299.20,.160],
+];
+const WA_A = [
+  [0,1000000,0,.10],[1000000,2000000,100000,.15],[2000000,3000000,250000,.17],
+  [3000000,4000000,420000,.19],[4000000,6000000,610000,.23],[6000000,7000000,1070000,.26],
+  [7000000,9000000,1330000,.30],[9000000,Infinity,1930000,.35],
+];
+const WA_B = [
+  [0,1000000,0,.10],[1000000,2000000,100000,.14],[2000000,3000000,240000,.15],
+  [3000000,4000000,390000,.16],[4000000,6000000,550000,.18],[6000000,7000000,910000,.19],
+  [7000000,9000000,1100000,.195],[9000000,Infinity,1490000,.20],
+];
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function bTax(amt, tbl) {
+  if (amt <= 0) return 0;
+  for (const [mn,mx,base,rate] of tbl) if (amt < mx) return base + (amt-mn)*rate;
+  const [mn,,base,rate] = tbl[tbl.length-1];
+  return base + (amt-mn)*rate;
+}
+function bIdx(amt, tbl) {
+  for (let i=0;i<tbl.length;i++) if (amt < tbl[i][1]) return i;
+  return tbl.length-1;
+}
+const USD = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:0,maximumFractionDigits:0});
+const PCT = new Intl.NumberFormat('en-US',{style:'percent',minimumFractionDigits:2,maximumFractionDigits:2});
+const $ = n => USD.format(n);
+const $n = n => USD.format(n).replace('$','');
+const pct = n => n > 0 ? PCT.format(n) : '—';
+
+// ── State metadata ────────────────────────────────────────────────────────────
+const TAX_STATES = {
+  CT:{name:'Connecticut',        sub:'12% flat · $15M exemption (federal-linked)'},
+  DC:{name:'District of Columbia',sub:'11.2%–16% · $4,988,400 exemption'},
+  HI:{name:'Hawaii',             sub:'10%–20% · $5.49M exemption · PORTABLE'},
+  IL:{name:'Illinois',           sub:'0.8%–16% · $4M exemption (frozen 2013)'},
+  ME:{name:'Maine',              sub:'8%–12% · $7.16M exemption (indexed)'},
+  MD:{name:'Maryland',           sub:'0.8%–16% · $5M exemption · PORTABLE + inh. tax'},
+  MA:{name:'Massachusetts',      sub:'0.8%–16% · $2M exemption · taxes full estate'},
+  MN:{name:'Minnesota',          sub:'13%–16% · $3M exemption'},
+  NY:{name:'New York',           sub:'3.06%–16% · $7.35M exemption · cliff at $7.72M'},
+  OR:{name:'Oregon',             sub:'10%–16% · $1M exemption (frozen 2012)'},
+  RI:{name:'Rhode Island',       sub:'0.8%–16% · $1.84M exemption (indexed)'},
+  VT:{name:'Vermont',            sub:'16% flat · $5M exemption'},
+  WA:{name:'Washington',         sub:'10%–35% / 10%–20% · Two rate structures 2026'},
+};
+const NO_TAX = [
+  ['AL','Alabama'],['AK','Alaska'],['AZ','Arizona'],['AR','Arkansas'],
+  ['CA','California'],['CO','Colorado'],['DE','Delaware'],['FL','Florida'],
+  ['GA','Georgia'],['ID','Idaho'],['IN','Indiana'],['IA','Iowa','Inh. tax repealed 2025'],
+  ['KS','Kansas'],['KY','Kentucky','Inheritance tax only'],['LA','Louisiana'],
+  ['MI','Michigan'],['MS','Mississippi'],['MO','Missouri'],['MT','Montana'],
+  ['NE','Nebraska','Inheritance tax only'],['NV','Nevada'],['NH','New Hampshire'],
+  ['NJ','New Jersey','Estate tax repealed 2018'],['NM','New Mexico'],
+  ['NC','North Carolina'],['ND','North Dakota'],['OH','Ohio'],['OK','Oklahoma'],
+  ['PA','Pennsylvania','Inheritance tax only'],['SC','South Carolina'],
+  ['SD','South Dakota'],['TN','Tennessee','Estate tax repealed 2016'],
+  ['TX','Texas'],['UT','Utah'],['VA','Virginia'],['WV','West Virginia'],
+  ['WI','Wisconsin'],['WY','Wyoming'],
+];
+
+// ── Computation engine ────────────────────────────────────────────────────────
+function computeState(abbr, gross, ded, opts={}) {
+  const taxable = Math.max(0, gross - ded);
+  const {ctGifts=0, hiDsue=0, waPeriod='B'} = opts;
+  switch(abbr) {
+    case 'CT': {
+      const ex=15000000, base=taxable+ctGifts, excess=Math.max(0,base-ex), tax=excess*.12;
+      return {tax, ex, steps:[
+        ['Taxable Estate (Gross − Deductions)', taxable],
+        ['Post-2004 Taxable Gifts Added Back', ctGifts],
+        ['Total Taxable Base', base],
+        ['CT Exemption', -ex],
+        ['Amount Above Exemption', excess],
+        ['× 12% Flat Rate', null],
+        ['CT Estate Tax', tax, true],
+      ], note:'CT is the only state with a unified gift + estate tax. Post-2004 gifts are added to the taxable base.'};
+    }
+    case 'VT': {
+      const ex=5000000, excess=Math.max(0,taxable-ex), tax=excess*.16;
+      return {tax, ex, steps:[
+        ['Taxable Estate (Gross − Deductions)', taxable],['VT Exemption', -ex],
+        ['Amount Above Exemption', excess],['× 16% Flat Rate', null],['VT Estate Tax', tax, true],
+      ]};
+    }
+    case 'DC': {
+      const ex=4988400, amt=Math.max(0,taxable-ex), tax=amt>0?bTax(amt,DC_T):0;
+      const bi=amt>0?bIdx(amt,DC_T):0; const [bMn,,bBase,bRate]=DC_T[bi];
+      return {tax, ex, steps:[
+        ['Taxable Estate', taxable],['DC Exemption (inflation-indexed)', -ex],
+        ['Taxable Amount above exemption', amt],
+        [`Bracket: $${$n(bMn)}+ at ${(bRate*100).toFixed(1)}%`, null],
+        ['Base Tax for Bracket', bBase],
+        [`+ (${$n(amt)} − ${$n(bMn)}) × ${(bRate*100).toFixed(1)}%`, (amt-bMn)*bRate],
+        ['DC Estate Tax', tax, true],
+      ], note:'DC uses its own 7-bracket schedule on amounts above the exemption — not the old federal credit table.'};
+    }
+    case 'IL': {
+      const ex=4000000, cr=280400, ate=Math.max(0,taxable-60000);
+      const tent=ate>0?bTax(ate,FED):0, tax=Math.max(0,tent-cr);
+      return {tax, ex, steps:[
+        ['Taxable Estate', taxable],['ATE = Taxable Estate − $60,000', ate],
+        ['Tentative Tax (old federal credit table)', tent],
+        ['− IL Exemption Credit (for $4M exemption)', -cr],['IL Estate Tax', tax, true],
+      ], note:'IL uses the pre-EGTRRA federal State Death Tax Credit table (IRC §2011). $4M exemption frozen since 2013.'};
+    }
+    case 'MD': {
+      const ex=5000000, cr=391600, ate=Math.max(0,taxable-60000);
+      const tent=ate>0?bTax(ate,FED):0, tax=Math.max(0,tent-cr);
+      return {tax, ex, steps:[
+        ['Taxable Estate', taxable],['ATE = Taxable Estate − $60,000', ate],
+        ['Tentative Tax (old federal credit table)', tent],
+        ['− MD Exemption Credit (for $5M exemption)', -cr],['MD Estate Tax', tax, true],
+      ], note:'MD also has a separate 10% inheritance tax on non-exempt beneficiaries (not computed here). MD is PORTABLE — DSUE available since 2019.'};
+    }
+    case 'MA': {
+      const ex=2000000, cr=99600, ate=Math.max(0,taxable-60000);
+      const tent=ate>0?bTax(ate,FED):0, tax=Math.max(0,tent-cr);
+      return {tax, ex, steps:[
+        ['Taxable Estate', taxable],['ATE = Taxable Estate − $60,000', ate],
+        ['Tentative Tax (on FULL estate)', tent],
+        ['− MA Exemption Credit (for $2M exemption)', -cr],['MA Estate Tax', tax, true],
+      ], note:'MA taxes the full estate then subtracts the $99,600 credit. Estates just above $2M can face a disproportionately high effective rate.'};
+    }
+    case 'MN': {
+      const ex=3000000, amt=Math.max(0,taxable-ex), tax=amt>0?bTax(amt,MN_T):0;
+      const bi=amt>0?bIdx(amt,MN_T):0; const [bMn,,,bRate]=MN_T[bi];
+      return {tax, ex, steps:[
+        ['Taxable Estate', taxable],['MN Exemption', -ex],
+        ['Taxable Amount above exemption', amt],
+        [`Bracket: $${$n(bMn)}+ at ${(bRate*100).toFixed(0)}%`, null],
+        ['MN Estate Tax', tax, true],
+      ], note:'MN offers a $5M exemption for qualified farm property and small business interests (§291.03 subd. 9). Not computed here.'};
+    }
+    case 'HI': {
+      const baseEx=5490000, effEx=baseEx+hiDsue, amt=Math.max(0,taxable-effEx), tax=amt>0?bTax(amt,HI_T):0;
+      const bi=amt>0?bIdx(amt,HI_T):0; const [bMn,,bBase,bRate]=HI_T[bi];
+      return {tax, ex:effEx, steps:[
+        ['Taxable Estate', taxable],['HI Base Exemption', -baseEx],
+        ...(hiDsue>0?[['+ DSUE from Predeceased Spouse', -hiDsue]]:[] ),
+        ['Effective HI Exemption', -effEx],['Taxable Amount above exemption', amt],
+        [`Bracket: $${$n(bMn)}+ at ${(bRate*100).toFixed(1)}%`, null],
+        ['HI Estate Tax', tax, true],
+      ], note:'Hawaii is the only state (besides federal) to allow full portability (DSUE). The $5M–$10M band is a single 15.7% rate — not five separate 1% brackets as some sources show.'};
+    }
+    case 'ME': {
+      const ex=7160000, amt=Math.max(0,taxable-ex), tax=amt>0?bTax(amt,ME_T):0;
+      const bi=amt>0?bIdx(amt,ME_T):0; const [bMn,,,bRate]=ME_T[bi];
+      return {tax, ex, steps:[
+        ['Taxable Estate', taxable],['ME Exemption (inflation-indexed)', -ex],
+        ['Taxable Amount above exemption', amt],
+        [`Bracket: $${$n(bMn)}+ at ${(bRate*100).toFixed(0)}%`, null],
+        ['ME Estate Tax', tax, true],
+      ], note:'ME exemption is indexed for inflation (~$160K–$200K annually). Verify with Maine Revenue Services each fall.'};
+    }
+    case 'NY': {
+      const ex=7350000, cr=627800, cliff=7717500;
+      const tent=taxable>0?bTax(taxable,NY_T):0;
+      let cliffStatus, modCr, tax;
+      if (taxable<=ex)           { cliffStatus='below'; modCr=cr; tax=0; }
+      else if (taxable>=cliff)   { cliffStatus='above'; modCr=0; tax=tent; }
+      else {
+        cliffStatus='cliff';
+        const ph=(taxable-ex)/(cliff-ex); modCr=cr*(1-ph);
+        tax=Math.max(0,tent-modCr);
+      }
+      return {tax, ex, cliffStatus, steps:[
+        ['Taxable Estate', taxable],
+        ['Tentative Tax (applied to FULL estate)', tent],
+        ['NY Exemption', ex], ['Cliff Threshold (105% × exemption)', cliff],
+        ...(cliffStatus==='below'?[['Status: Below exemption — full credit',null],['− Exemption Credit', -cr]]:[]),
+        ...(cliffStatus==='cliff'?[
+          ['⚠ Status: CLIFF ZONE — credit phases out', null],
+          [`Phase-Out % = (${$n(taxable)} − ${$n(ex)}) / ${$n(cliff-ex)}`, (taxable-ex)/(cliff-ex)],
+          [`Modified Credit = ${$(cr)} × (1 − phase-out %)`, modCr],
+          ['− Modified Credit', -modCr],
+        ]:[]),
+        ...(cliffStatus==='above'?[['Status: Above cliff — NO credit applies',null],['Credit', 0]]:[]),
+        ['NY Estate Tax', tax, true],
+      ], note: cliffStatus==='cliff'
+        ? '⚠ This estate is in the NY cliff zone. Even a small increase in estate value can substantially increase the NY tax owed.'
+        : cliffStatus==='above'
+        ? 'This estate is above the NY cliff threshold. The full tentative tax applies with no exemption credit.'
+        : 'This estate is below the NY exemption. No NY estate tax is owed.'};
+    }
+    case 'OR': {
+      const ex=1000000, amt=Math.max(0,taxable-ex), tax=amt>0?bTax(amt,OR_T):0;
+      const bi=amt>0?bIdx(amt,OR_T):0; const [bMn,,,bRate]=OR_T[bi];
+      return {tax, ex, steps:[
+        ['Taxable Estate', taxable],['OR Exemption (frozen since 2012)', -ex],
+        ['Taxable Amount above exemption', amt],
+        [`Bracket: $${$n(bMn)}+ at ${(bRate*100).toFixed(2)}%`, null],
+        ['OR Estate Tax', tax, true],
+      ], note:'OR exemption has been frozen at $1M since 2012. SB 1511 did not pass — legislature adjourned sine die March 6, 2026.'};
+    }
+    case 'RI': {
+      const ex=1838056, cr=87940, ate=Math.max(0,taxable-60000);
+      const tent=ate>0?bTax(ate,FED):0, tax=Math.max(0,tent-cr);
+      return {tax, ex, steps:[
+        ['Taxable Estate', taxable],['ATE = Taxable Estate − $60,000', ate],
+        ['Tentative Tax (old federal credit table)', tent],
+        ['− RI Exemption Credit (for $1,838,056 exemption)', -cr],['RI Estate Tax', tax, true],
+      ], note:'RI exemption is inflation-indexed annually. Source: RI Gen. Laws §44-22-1.1; Form RI-706.'};
+    }
+    case 'WA': {
+      const isA=waPeriod==='A', ex=isA?3076000:3000000, tbl=isA?WA_A:WA_B;
+      const label=isA?'Period A (Jan–Jun, ESSB 5813)':'Period B (Jul–Dec, ESB 6347)';
+      const rng=isA?'10%–35%':'10%–20%';
+      const amt=Math.max(0,taxable-ex), tax=amt>0?bTax(amt,tbl):0;
+      const bi=amt>0?bIdx(amt,tbl):0; const [bMn,,,bRate]=tbl[bi];
+      return {tax, ex, steps:[
+        [`Period: ${label} — ${rng}`, null],
+        ['Taxable Estate', taxable],[`WA Exemption (${isA?'CPI-indexed':'fixed 2026'})`, -ex],
+        ['Taxable Amount above exemption', amt],
+        [`Bracket: $${$n(bMn)}+ at ${(bRate*100).toFixed(1)}%`, null],
+        ['WA Estate Tax', tax, true],
+      ], note:isA?'WA Period A (ESSB 5813): 10%–35% on excess above $3.076M.':'WA Period B (ESB 6347): 10%–20% on excess above $3M (fixed for 2026). CPI indexing resumes Jan 1, 2027.'};
+    }
+    default: return {tax:0, ex:0, steps:[], note:''};
+  }
+}
+
+// ── Build steps HTML (shared) ─────────────────────────────────────────────────
+function stepsHTML(steps, note, cliffStatus, compact=false) {
+  const rowClass = compact ? 'other-step-row' : 'step-row';
+  let h = '';
+  for (const [label, value, isResult] of steps) {
+    if (isResult) {
+      h += `<div class="${rowClass} result-row"><span>${label}</span><span>${$(Math.abs(value))}</span></div>`;
+    } else if (value === null) {
+      h += `<div class="${rowClass} italic"><span>${label}</span><span></span></div>`;
+    } else {
+      const neg = value < 0;
+      h += `<div class="${rowClass}${neg?' neg':''}"><span>${label}</span><span>${neg?'('+$(Math.abs(value))+')':$(value)}</span></div>`;
+    }
+  }
+  if (cliffStatus === 'cliff') {
+    h += `<div class="cliff-inline">⚠ Cliff zone: adding even a small amount to this estate could significantly increase NY tax. Careful planning recommended.</div>`;
+  }
+  if (note) h += `<div class="${compact?'other-detail-note':'step-note'}">${note}</div>`;
+  return h;
+}
+
+// ── Card 1: Featured State ────────────────────────────────────────────────────
+function renderFeatured(abbr, result, gross) {
+  const isTaxState = abbr in TAX_STATES;
+  const stateName = isTaxState ? TAX_STATES[abbr].name : ALL_NAMES[abbr] || abbr;
+  const stateSub  = isTaxState ? TAX_STATES[abbr].sub : 'No state estate tax';
+  const el = document.getElementById('featured-card');
+
+  if (!isTaxState) {
+    el.innerHTML = `
+      <div class="featured-header">
+        <div class="featured-left">
+          <div class="featured-abbr-badge">${abbr}</div>
+          <div>
+            <div class="featured-state-name">${stateName}</div>
+            <div class="featured-state-sub">${stateSub}</div>
+          </div>
+        </div>
+        <div class="featured-right">
+          <div class="featured-tax-label">Estimated Estate Tax</div>
+          <div class="featured-no-tax-value">$0</div>
+          <div class="featured-tax-sub">No state estate tax</div>
+        </div>
+      </div>
+      <div class="no-tax-state-body">
+        <div class="no-tax-icon">✓</div>
+        <div>
+          <div class="no-tax-msg-title">${stateName} has no state estate tax.</div>
+          <div class="no-tax-msg-body">Your estate will owe no state estate tax in ${stateName}. However, federal estate tax may still apply to estates above $15,000,000. Some states have inheritance taxes paid by beneficiaries — check with an estate planning attorney for your full picture.</div>
+        </div>
+      </div>`;
+    return;
+  }
+
+  const {tax, ex, steps, note, cliffStatus} = result;
+  const effRate = gross > 0 ? tax / gross : 0;
+  const isCliff = cliffStatus === 'cliff';
+  const cliffBanner = isCliff
+    ? `<div class="cliff-banner">⚠ <strong>New York Cliff Zone</strong> — This estate falls between the exemption ($7,350,000) and the cliff ($7,717,500). The exemption credit is partially phased out. Small increases in estate value can trigger a large tax jump.</div>`
+    : '';
+
+  el.innerHTML = `
+    <div class="featured-header">
+      <div class="featured-left">
+        <div class="featured-abbr-badge">${abbr}</div>
+        <div>
+          <div class="featured-state-name">${stateName}</div>
+          <div class="featured-state-sub">${stateSub}</div>
+        </div>
+      </div>
+      <div class="featured-right">
+        <div class="featured-tax-label">Estimated Estate Tax</div>
+        <div class="featured-tax-value">${$(tax)}</div>
+        <div class="featured-tax-sub">
+          ${tax > 0 ? `Eff. rate ${pct(effRate)} · Exemption ${$(ex)}` : 'Estate is below the exemption threshold'}
+        </div>
+      </div>
+    </div>
+    ${cliffBanner}
+    <div class="featured-steps">
+      <div class="steps-title">Step-by-Step Computation</div>
+      ${stepsHTML(steps, note, cliffStatus, false)}
+    </div>`;
+}
+
+// ── Card 2: Other Estate Tax States ──────────────────────────────────────────
+function renderOthers(selectedAbbr, results, gross, taxable) {
+  const others = Object.keys(TAX_STATES)
+    .filter(a => a !== selectedAbbr)
+    .map(a => ({abbr:a, ...TAX_STATES[a], ...results[a]}))
+    .sort((a,b) => b.tax - a.tax);
+
+  const withTax = others.filter(s => s.tax > 0).length;
+  const el = document.getElementById('other-card');
+  let html = `
+    <div class="other-header">
+      <div class="other-header-left">
+        <h3>Other Estate Tax Jurisdictions</h3>
+        <span class="other-count-badge">${others.length} states</span>
+      </div>
+      <span style="font-size:12px;color:var(--text-3)">${withTax} with liability · click any row to expand</span>
+    </div>
+    <div class="other-col-heads">
+      <div class="col-h">State</div>
+      <div class="col-h r">Exemption</div>
+      <div class="col-h r">Taxable Estate</div>
+      <div class="col-h r">Est. Tax</div>
+      <div class="col-h r">Eff. Rate</div>
+      <div class="col-h"></div>
+    </div>`;
+
+  others.forEach(s => {
+    const effRate = gross > 0 ? s.tax / gross : 0;
+    const cliffBadge = s.abbr==='NY' && s.cliffStatus==='cliff'
+      ? `<span style="font-size:10px;font-weight:700;color:var(--amber);background:var(--amber-pale);border:1px solid var(--amber-border);border-radius:3px;padding:1px 5px;margin-left:.35rem">CLIFF</span>` : '';
+    html += `
+      <div class="other-row" id="orow-${s.abbr}">
+        <div class="other-row-main" onclick="toggleOther('${s.abbr}')">
+          <div class="other-name-wrap">
+            <div class="other-abbr-badge">${s.abbr}</div>
+            <div>
+              <div class="other-name">${s.name}${cliffBadge}</div>
+              <div class="other-sub">${s.sub}</div>
+            </div>
+          </div>
+          <div class="c-amt">${$(s.ex)}</div>
+          <div class="c-amt">${$(taxable)}</div>
+          <div class="c-tax${s.tax===0?' zero':''}">${s.tax===0?'—':$(s.tax)}</div>
+          <div class="c-rate${s.tax===0?' zero':''}">${pct(effRate)}</div>
+          <button class="row-expand-btn" id="obtn-${s.abbr}">+</button>
+        </div>
+        <div class="other-detail" id="odet-${s.abbr}">
+          <div class="steps-title">Step-by-Step Computation</div>
+          ${stepsHTML(s.steps, s.note, s.cliffStatus, true)}
+        </div>
+      </div>`;
+  });
+
+  el.innerHTML = html;
+}
+
+// ── Card 3: No Estate Tax States ──────────────────────────────────────────────
+function renderNoTax(selectedAbbr) {
+  const list = NO_TAX.filter(([a]) => a !== selectedAbbr);
+  const el = document.getElementById('notax-card');
+  let grid = '';
+  list.forEach(([abbr, name, note]) => {
+    grid += `<div class="notax-item">
+      <span class="notax-abbr">${abbr}</span>
+      <div><div class="notax-name">${name}</div>${note?`<div class="no-tax-note-small">${note}</div>`:''}</div>
+    </div>`;
+  });
+  el.innerHTML = `
+    <div class="notax-header" onclick="toggleNoTax(this)">
+      <div class="notax-header-left">
+        <span class="notax-icon">○</span>
+        <div>
+          <div class="notax-title">${list.length} States with No Estate Tax</div>
+          <div class="notax-sub">No estate tax owed in these jurisdictions — inheritance taxes may still apply in some</div>
+        </div>
+      </div>
+      <button class="notax-expand-btn" id="notax-btn">Show states ▼</button>
+    </div>
+    <div class="notax-body" id="notax-body">
+      <div class="notax-grid">${grid}</div>
+    </div>`;
+}
+
+// ── Toggle handlers ───────────────────────────────────────────────────────────
+const expandedOther = new Set();
+function toggleOther(abbr) {
+  const det = document.getElementById(`odet-${abbr}`);
+  const btn = document.getElementById(`obtn-${abbr}`);
+  if (expandedOther.has(abbr)) {
+    det.classList.remove('open'); btn.classList.remove('open'); btn.textContent='+';
+    expandedOther.delete(abbr);
+  } else {
+    det.classList.add('open'); btn.classList.add('open'); btn.textContent='−';
+    expandedOther.add(abbr);
+  }
+}
+function toggleNoTax(headerEl) {
+  const body = document.getElementById('notax-body');
+  const btn  = document.getElementById('notax-btn');
+  const open = body.classList.toggle('open');
+  btn.textContent = open ? 'Hide states ▲' : 'Show states ▼';
+}
+function toggleOpt(btn) {
+  const body = document.getElementById('opt-body');
+  const chev = document.getElementById('opt-chev');
+  const open = body.classList.toggle('open');
+  chev.textContent = open ? '▼' : '▶';
+}
+
+// ── State name lookup for no-tax states ──────────────────────────────────────
+const ALL_NAMES = Object.fromEntries(NO_TAX.map(([a,n])=>[a,n]));
+
+// ── Main calculate ────────────────────────────────────────────────────────────
+function calculate() {
+  const selectedAbbr = document.getElementById('sel-state').value;
+  const gross = parseFloat(document.getElementById('gross').value) || 0;
+  const ded   = parseFloat(document.getElementById('deductions').value) || 0;
+  const opts  = {
+    ctGifts:  parseFloat(document.getElementById('ct-gifts').value)||0,
+    hiDsue:   parseFloat(document.getElementById('hi-dsue').value)||0,
+    waPeriod: document.querySelector('input[name="wa"]:checked').value,
+  };
+
+  if (!selectedAbbr) { alert('Please select a state.'); return; }
+  if (gross <= 0)     { alert('Please enter a gross estate value.'); return; }
+
+  const taxable = Math.max(0, gross - ded);
+  const allResults = {};
+  for (const abbr of Object.keys(TAX_STATES)) {
+    allResults[abbr] = computeState(abbr, gross, ded, opts);
+  }
+
+  const featResult = allResults[selectedAbbr] || null;
+  renderFeatured(selectedAbbr, featResult, gross);
+  renderOthers(selectedAbbr, allResults, gross, taxable);
+  renderNoTax(selectedAbbr);
+
+  expandedOther.clear();
+  const resultsEl = document.getElementById('results');
+  resultsEl.classList.add('visible');
+  setTimeout(() => resultsEl.scrollIntoView({behavior:'smooth', block:'start'}), 50);
+}
+
+function setExample(state, gross) {
+  document.getElementById('sel-state').value = state;
+  document.getElementById('gross').value = gross;
+  document.getElementById('deductions').value = 0;
+  calculate();
+}
+
+document.addEventListener('keydown', e => { if (e.key==='Enter') calculate(); });
+</script>
+</body>
+</html>
